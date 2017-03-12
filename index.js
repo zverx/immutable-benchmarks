@@ -4,22 +4,18 @@ var moriJs = require('mori');
 var update = require('react-addons-update');
 
 var REPEATS;
-var repeats = [1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000];
+var repeats = [1000, 10000, 1000000];
 
 function getFormatedRepeats() {
     switch (REPEATS) {
         case 1000: return '    1000';
-        case 5000: return '    5000';
         case 10000: return '   10000';
-        case 50000: return '   50000';
-        case 100000: return '  100000';
-        case 500000: return '  500000';
         case 1000000: return ' 1000000';
-        case 5000000: return ' 5000000';
     }
 }
 
 function test(callback) {
+    console.log('```javascript');
     for (var i = 0; i < repeats.length; i++) {
         REPEATS = repeats[i]
         var startTime = Date.now();
@@ -28,6 +24,7 @@ function test(callback) {
         console.log(getFormatedRepeats() + ' / ' + testTime);
         global.gc();
     }
+    console.log('```');
 }
 
 //== get object ==
