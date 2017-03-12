@@ -15,7 +15,7 @@ function getFormatedRepeats() {
 }
 
 function test(callback) {
-    console.log('```javascript');
+    //console.log('```javascript');
     for (var i = 0; i < repeats.length; i++) {
         REPEATS = repeats[i]
         var startTime = Date.now();
@@ -24,7 +24,7 @@ function test(callback) {
         console.log(getFormatedRepeats() + ' / ' + testTime);
         global.gc();
     }
-    console.log('```');
+    //console.log('```');
 }
 
 //== get object ==
@@ -290,7 +290,7 @@ function objectSetReactAddonsUpdateJs() {
         value: Math.random()
     };
     for (var i = 0; i < REPEATS; i++) {
-        obj = update(obj, { value: { $set: Math.random() } })
+        update(obj, { value: { $set: Math.random() } })
     }
 }
 
@@ -342,11 +342,7 @@ function arraySetReactAddonsUpdateJs() {
     ];
     var maxIndex = arr.length - 1;
     for (var i = 0; i < REPEATS; i++) {
-        arr = update([], { $push: arr });
-        update(arr, { [~~(Math.random() * maxIndex)]: { $set: Math.random() } })
-        //from native
-        //arr = [].concat(arr);
-        //arr[~~(Math.random() * maxIndex)] = Math.random();
+        arr = update(arr, { [~~(Math.random() * maxIndex)]: { $set: Math.random() } })
     }
 }
 
@@ -405,13 +401,6 @@ function objectSetInReactAddonsUpdateJs() {
     };
     for (var i = 0; i < REPEATS; i++) {
         obj = update(obj, { data: { value: { $set: Math.random() } } });
-
-        //from native
-        // obj = Object.assign({}, obj, {
-        //     data: Object.assign({}, obj.data, {
-        //         value: Math.random()
-        //     })
-        // });
     }
 }
 
@@ -463,12 +452,7 @@ function arraySetInReactAddonsUpdateJs() {
     ]];
     var maxIndex = arr[0].length - 1;
     for (var i = 0; i < REPEATS; i++) {
-        arr = update([], { $push: arr });
-        arr[0] = update([], { $push: arr[0] });
-        update(arr[0], { [~~(Math.random() * maxIndex)]: { $set: Math.random() } });
-        // arr = [].concat(arr);
-        // arr[0] = [].concat(arr[0]);
-        // arr[0][~~(Math.random() * maxIndex)] = Math.random();
+        update(arr, { [0]: { [~~(Math.random() * maxIndex)]: { $set: Math.random() } } });
     }
 }
 
