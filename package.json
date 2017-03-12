@@ -11,6 +11,8 @@
   "dependencies": {
     "immutable": "^3.8.1",
     "mori": "^0.3.2",
+    "react": "^15.4.2",
+    "react-addons-update": "^15.4.2",
     "seamless-immutable": "^6.1.0"
   }
 }
