@@ -2,6 +2,7 @@ var seamlessImmutableJs = require('seamless-immutable');
 var immutableJs = require('immutable');
 var moriJs = require('mori');
 var update = require('react-addons-update');
+var updateih = require('immutability-helper');
 
 var REPEATS;
 var repeats = [1000, 10000, 1000000];
@@ -77,6 +78,16 @@ function objectGetReactAddonsUpdateJs() {
     }
 }
 
+function objectGetImmutabilityHelperJs() {
+    var obj = {
+        value: Math.random()
+    };
+    var value;
+    for (var i = 0; i < REPEATS; i++) {
+        value = obj.value;
+    }
+}
+
 //== get array ==
 
 function arrayGetNative() {
@@ -122,6 +133,17 @@ function arrayGetMoriJs() {
 }
 
 function arrayGetReactAddonsUpdateJs() {
+    var arr = [
+        Math.random(), Math.random(), Math.random(), Math.random(), Math.random()
+    ];
+    var value;
+    var maxIndex = arr.length - 1;
+    for (var i = 0; i < REPEATS; i++) {
+        value = arr[~~(Math.random() * maxIndex)];
+    }
+}
+
+function arrayGetImmutabilityHelperJs() {
     var arr = [
         Math.random(), Math.random(), Math.random(), Math.random(), Math.random()
     ];
@@ -190,6 +212,18 @@ function objectGetInReactAddonsUpdateJs() {
     }
 }
 
+function objectGetInImmutabilityHelperJs() {
+    var obj = {
+        data: {
+            value: Math.random()
+        }
+    };
+    var value;
+    for (var i = 0; i < REPEATS; i++) {
+        value = obj.data.value;
+    }
+}
+
 //=== getIn array ===
 
 function arrayGetInNative() {
@@ -235,6 +269,17 @@ function arrayGetInMoriJs() {
 }
 
 function arrayGetInReactAddonsUpdateJs() {
+    var arr = [[
+        Math.random(), Math.random(), Math.random(), Math.random(), Math.random()
+    ]];
+    var value;
+    var maxIndex = arr[0].length - 1;
+    for (var i = 0; i < REPEATS; i++) {
+        value = arr[0][~~(Math.random() * maxIndex)];
+    }
+}
+
+function arrayGetInImmutabilityHelperJs() {
     var arr = [[
         Math.random(), Math.random(), Math.random(), Math.random(), Math.random()
     ]];
@@ -294,6 +339,15 @@ function objectSetReactAddonsUpdateJs() {
     }
 }
 
+function objectSetImmutabilityHelperJs() {
+    var obj = {
+        value: Math.random()
+    };
+    for (var i = 0; i < REPEATS; i++) {
+        updateih(obj, { value: { $set: Math.random() } })
+    }
+}
+
 //== set array ==
 
 function arraySetNative() {
@@ -343,6 +397,16 @@ function arraySetReactAddonsUpdateJs() {
     var maxIndex = arr.length - 1;
     for (var i = 0; i < REPEATS; i++) {
         arr = update(arr, { [~~(Math.random() * maxIndex)]: { $set: Math.random() } })
+    }
+}
+
+function arraySetImmutabilityHelperJs() {
+    var arr = [
+        Math.random(), Math.random(), Math.random(), Math.random(), Math.random()
+    ];
+    var maxIndex = arr.length - 1;
+    for (var i = 0; i < REPEATS; i++) {
+        arr = updateih(arr, { [~~(Math.random() * maxIndex)]: { $set: Math.random() } })
     }
 }
 
@@ -404,6 +468,17 @@ function objectSetInReactAddonsUpdateJs() {
     }
 }
 
+function objectSetInImmutabilityHelperJs() {
+    var obj = {
+        data: {
+            value: Math.random()
+        }
+    };
+    for (var i = 0; i < REPEATS; i++) {
+        obj = updateih(obj, { data: { value: { $set: Math.random() } } });
+    }
+}
+
 //== setIn array ==
 
 function arraySetInNative() {
@@ -456,6 +531,16 @@ function arraySetInReactAddonsUpdateJs() {
     }
 }
 
+function arraySetInImmutabilityHelperJs() {
+    var arr = [[
+        Math.random(), Math.random(), Math.random(), Math.random(), Math.random()
+    ]];
+    var maxIndex = arr[0].length - 1;
+    for (var i = 0; i < REPEATS; i++) {
+        updateih(arr, { [0]: { [~~(Math.random() * maxIndex)]: { $set: Math.random() } } });
+    }
+}
+
 console.log('[get] Object Native (repeats / ms):');
 test(objectGetNative);
 console.log('[get] Object Seamless-immutable.js (repeats / ms): ');
@@ -466,6 +551,8 @@ console.log('[get] Object Mori.js (repeats / ms):');
 test(objectGetMoriJs);
 console.log('[get] Object react-addons-update.js (repeats / ms):');
 test(objectGetReactAddonsUpdateJs);
+console.log('[get] Object immutability-helper.js (repeats / ms):');
+test(objectGetImmutabilityHelperJs);
 
 console.log('[get] Array Native (repeats / ms):');
 test(arrayGetNative);
@@ -477,6 +564,8 @@ console.log('[get] Array Mori.js (repeats / ms):');
 test(arrayGetMoriJs);
 console.log('[get] Array react-addons-update.js (repeats / ms):');
 test(arrayGetReactAddonsUpdateJs);
+console.log('[get] Array immutability-helper.js (repeats / ms):');
+test(arrayGetImmutabilityHelperJs);
 
 console.log('[getIn] Object Native. GetIn (repeats / ms):');
 test(objectGetInNative);
@@ -488,6 +577,8 @@ console.log('[getIn] Object Mori.js (repeats / ms):');
 test(objectGetInMoriJs);
 console.log('[getIn] Object react-addons-update.js (repeats / ms):');
 test(objectGetInReactAddonsUpdateJs);
+console.log('[getIn] Object immutability-helper.js (repeats / ms):');
+test(objectGetInImmutabilityHelperJs);
 
 console.log('[getIn] Array Native (repeats / ms):');
 test(arrayGetInNative);
@@ -499,6 +590,8 @@ console.log('[getIn] Array Mori.js (repeats / ms):');
 test(arrayGetInMoriJs);
 console.log('[getIn] Array react-addons-update.js (repeats / ms):');
 test(arrayGetInReactAddonsUpdateJs);
+console.log('[getIn] Array immutability-helper.js (repeats / ms):');
+test(arrayGetInImmutabilityHelperJs);
 
 console.log('[set] Object Native (repeats / ms):');
 test(objectSetNative);
@@ -510,6 +603,8 @@ console.log('[set] Object Mori.js (repeats / ms):');
 test(objectSetMoriJs);
 console.log('[set] Object react-addons-update.js (repeats / ms):');
 test(objectSetReactAddonsUpdateJs);
+console.log('[set] Object immutability-helper.js (repeats / ms):');
+test(objectSetImmutabilityHelperJs);
 
 console.log('[set] Array Native (repeats / ms):');
 test(arraySetNative);
@@ -521,6 +616,8 @@ console.log('[set] Array Mori.js (repeats / ms):');
 test(arraySetMoriJs);
 console.log('[set] Array react-addons-update.js (repeats / ms):');
 test(arraySetReactAddonsUpdateJs);
+console.log('[set] Array immutability-helper.js (repeats / ms):');
+test(arraySetImmutabilityHelperJs);
 
 console.log('[setIn] Object Native (repeats / ms):');
 test(objectSetInNative);
@@ -532,6 +629,8 @@ console.log('[setIn] Object Mori.js (repeats / ms):');
 test(objectSetInMoriJs);
 console.log('[setIn] Object react-addons-update.js (repeats / ms):');
 test(objectSetInReactAddonsUpdateJs);
+console.log('[setIn] Object immutability-helper.js (repeats / ms):');
+test(objectSetInImmutabilityHelperJs);
 
 console.log('[setIn] Array Native (repeats / ms):');
 test(arraySetInNative);
@@ -543,3 +642,5 @@ console.log('[setIn] Array Mori.js (repeats / ms):');
 test(arraySetInMoriJs);
 console.log('[setIn] Array react-addons-update.js (repeats / ms):');
 test(arraySetInReactAddonsUpdateJs);
+console.log('[setIn] Array immutability-helper.js (repeats / ms):');
+test(arraySetInImmutabilityHelperJs);
