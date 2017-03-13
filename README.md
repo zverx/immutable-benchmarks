@@ -1,4 +1,4 @@
-##Seamless-immutable vs Immutable.js vs Mori vs React-Addons-Update
+##Seamless-immutable vs Immutable.js vs Mori vs React-Addons-Update vs Immutability-Helper
 ####[get] Object Native (repeats / ms):
 ```javascript
     1000 / 0
