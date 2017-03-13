@@ -16,7 +16,7 @@ function getFormatedRepeats() {
 }
 
 function test(callback) {
-    //console.log('```javascript');
+    console.log('```javascript');
     for (var i = 0; i < repeats.length; i++) {
         REPEATS = repeats[i]
         var startTime = Date.now();
@@ -25,7 +25,7 @@ function test(callback) {
         console.log(getFormatedRepeats() + ' / ' + testTime);
         global.gc();
     }
-    //console.log('```');
+    console.log('```');
 }
 
 //== get object ==
